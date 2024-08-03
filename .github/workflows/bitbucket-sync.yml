@@ -1,27 +1,26 @@
 name: Sync Bitbucket to GitLab
+
 on:
-  workflow_dispatch:
-#on:
- # repository_dispatch:
-  #types: [bitbucket_push]
+  workflow_dispatch:  # Permet de déclencher l'action manuellement
 
 jobs:
   sync:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-        with:
-          repository: Agartev/https://bitbucket.org/agartev/atlas.git
-          token: ATCTT3xFfGN0S206Uy5hxJzgCBf-mEoRRi8SGbY_3itpo8DeVh3vJT_NS0KNszi2zUDWbhIa88DgtnZJtTNiAYJTome5Ncl991lpFxbach72ctPBZZrw0g0pPgNKSkMrOQYvtTSe7uoj3K0MiNmr7tnhAVpvwl2fsg12H1t5sgFjqjvsuI96-Q0=A9844EB9
-      - name: Sync to GitLab
+      - name: Checkout Repository from Bitbucket
         run: |
-          git remote add gitlab https://gitlab.com/Agartev/atlas.git
-          git push gitlab main
+          git clone https://x-token-auth:ATCTT3xFfGN0VrVFWn7LVYgpCtRl-UApLFzlNcdtwldiaTEDLEd7qv2OeuKvTNk8oiWOagNJklvE3GXMJQHx-o6jLdXInE_HtR5Blz2IebDO7aCaXSsAkE6g7DKFG53uJ4OiKzxDiAL8TH5h_P7gVasMhxTs5nZ8zdeG8JCZDm3kLAi5ZPy_tMc=FE15E912@bitbucket.org/agartev/atlas.git
+          cd atlas
+
+      - name: Set Up GitLab Remote
+        run: |
+          git remote add gitlab https://xtoken-auth:glpat-ydFXhDi1FqeyG5DjAb7V@gitlab.com/Agartev/atlas.git
 
       - name: Check if GitLab Repository is Empty
         id: check_empty
         run: |
+          # Vérifier si le dépôt GitLab est vide
           if [ "$(git ls-remote --heads gitlab main)" ]; then
             echo "GitLab repository is not empty."
             echo "empty=false" >> $GITHUB_ENV
@@ -33,11 +32,13 @@ jobs:
       - name: Push to GitLab if Not Empty
         if: env.empty == 'false'
         run: |
+          # Pousser les modifications vers GitLab si le dépôt n'est pas vide
           git push gitlab main
 
       - name: Initialize and Push to GitLab if Empty
         if: env.empty == 'true'
         run: |
+          # Initialiser le dépôt GitLab s'il est vide et pousser les fichiers
           git checkout -b main
           git add .
           git commit -m "Initial commit"
