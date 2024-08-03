@@ -12,7 +12,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
         with:
-          repository: https://Agartev/bitbucket.org/agartev/atlas.git
+          repository: Agartev/https://bitbucket.org/agartev/atlas.git
           token: ATCTT3xFfGN0S206Uy5hxJzgCBf-mEoRRi8SGbY_3itpo8DeVh3vJT_NS0KNszi2zUDWbhIa88DgtnZJtTNiAYJTome5Ncl991lpFxbach72ctPBZZrw0g0pPgNKSkMrOQYvtTSe7uoj3K0MiNmr7tnhAVpvwl2fsg12H1t5sgFjqjvsuI96-Q0=A9844EB9
       - name: Sync to GitLab
         run: |
