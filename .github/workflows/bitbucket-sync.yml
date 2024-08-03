@@ -10,8 +10,9 @@ jobs:
     steps:
       - name: Checkout Repository from Bitbucket
         run: |
-          git clone https://x-token-auth:ATCTT3xFfGN0VrVFWn7LVYgpCtRl-UApLFzlNcdtwldiaTEDLEd7qv2OeuKvTNk8oiWOagNJklvE3GXMJQHx-o6jLdXInE_HtR5Blz2IebDO7aCaXSsAkE6g7DKFG53uJ4OiKzxDiAL8TH5h_P7gVasMhxTs5nZ8zdeG8JCZDm3kLAi5ZPy_tMc=FE15E912@bitbucket.org/agartev/atlas.git
-          cd atlas
+          git clone https://x-token-auth:ATCTT3xFfGN0VrVFWn7LVYgpCtRl-UApLFzlNcdtwldiaTEDLEd7qv2OeuKvTNk8oiWOagNJklvE3GXMJQHx-o6jLdXInE_HtR5Blz2IebDO7aCaXSsAkE6g7DKFG53uJ4OiKzxDiAL8TH5h_P7gVasMhxTs5nZ8zdeG8JCZDm3kLAi5ZPy_tMc=FE15E912@bitbucket.org/agartev/atlas.git repo
+          cd repo
+          echo "$(ls)"
 
       - name: Set Up GitLab Remote
         run: |
