@@ -1,7 +1,7 @@
 name: Sync Bitbucket to GitLab
-
 on:
-  workflow_dispatch:  # Permet de déclencher l'action manuellement
+  repository_dispatch:
+    types: [trigger_workflow]
 
 jobs:
   sync:
