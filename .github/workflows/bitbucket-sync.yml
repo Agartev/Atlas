@@ -9,14 +9,15 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository from Bitbucket
-        run: |
-          git clone https://bitbucket.org/agartev/atlas.git
-          cd atlas
-          
-      - name: Set Up GitLab Remote
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          repository: https://bitbucket.org/agartev/atlas.git
+          token: ATCTT3xFfGN0S206Uy5hxJzgCBf-mEoRRi8SGbY_3itpo8DeVh3vJT_NS0KNszi2zUDWbhIa88DgtnZJtTNiAYJTome5Ncl991lpFxbach72ctPBZZrw0g0pPgNKSkMrOQYvtTSe7uoj3K0MiNmr7tnhAVpvwl2fsg12H1t5sgFjqjvsuI96-Q0=A9844EB9
+      - name: Sync to GitLab
         run: |
           git remote add gitlab https://gitlab.com/Agartev/atlas.git
+          git push gitlab main
 
       - name: Check if GitLab Repository is Empty
         id: check_empty
