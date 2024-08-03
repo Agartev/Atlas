@@ -16,6 +16,7 @@ jobs:
 
       - name: Set Up GitLab Remote
         run: |
+          echo "$(ls -la)"
           git remote add gitlab https://xtoken-auth:glpat-ydFXhDi1FqeyG5DjAb7V@gitlab.com/Agartev/atlas.git
 
       - name: Check if GitLab Repository is Empty
