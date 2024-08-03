@@ -1,0 +1,42 @@
+name: Sync Bitbucket to GitLab
+
+on:
+  repository_dispatch:
+    types: [bitbucket_push]
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository from Bitbucket
+        run: |
+          git clone https://bitbucket.org/agartev/atlas.git
+          cd atlas
+          
+      - name: Set Up GitLab Remote
+        run: |
+          git remote add gitlab https://gitlab.com/Agartev/atlas.git
+
+      - name: Check if GitLab Repository is Empty
+        id: check_empty
+        run: |
+          if [ "$(git ls-remote --heads gitlab main)" ]; then
+            echo "GitLab repository is not empty."
+            echo "empty=false" >> $GITHUB_ENV
+          else
+            echo "GitLab repository is empty."
+            echo "empty=true" >> $GITHUB_ENV
+          fi
+
+      - name: Push to GitLab if Not Empty
+        if: env.empty == 'false'
+        run: |
+          git push gitlab main
+
+      - name: Initialize and Push to GitLab if Empty
+        if: env.empty == 'true'
+        run: |
+          git checkout -b main
+          git add .
+          git commit -m "Initial commit"
+          git push gitlab main
