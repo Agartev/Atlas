@@ -35,7 +35,7 @@ jobs:
         run: |
           cd repo
           # Pousser les modifications vers GitLab si le dépôt n'est pas vide
-          git push gitlab main
+          git push -f gitlab main
 
       - name: Initialize and Push to GitLab if Empty
         if: env.empty == 'true'
