@@ -1,8 +1,9 @@
 name: Sync Bitbucket to GitLab
-
 on:
-  repository_dispatch:
-    types: [bitbucket_push]
+  workflow_dispatch:
+#on:
+ # repository_dispatch:
+  #types: [bitbucket_push]
 
 jobs:
   sync:
